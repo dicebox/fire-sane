@@ -342,6 +342,11 @@ else -- Fire enabled
 		chance = 18,
 		catch_up = false,
 		action = function(pos, node, active_object_count, active_object_count_wider)
+			-- Lets give nature a chance to get rid of fire
+			local flamedeath = 0.15
+			if flamedeath <= math.random() then
+				minetest.remove_node(pos)
+			end
 			local p = minetest.find_node_near(pos, 1, {"group:flammable"})
 			if p then
 				local flammable_node = minetest.get_node(p)
