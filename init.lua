@@ -326,8 +326,12 @@ else -- Fire enabled
 				return
 			end
 			local p = minetest.find_node_near(pos, 1, {"air"})
+			local flamecold = 0.15
 			if p then
-				minetest.set_node(p, {name = "fire:basic_flame"})
+				-- Add a test to avoid spreading fire and its power of destruction
+				if flamecold > math.random() then
+					minetest.set_node(p, {name = "fire:basic_flame"})
+				end
 			end
 		end,
 	})
